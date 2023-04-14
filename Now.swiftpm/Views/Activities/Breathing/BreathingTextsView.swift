@@ -35,7 +35,6 @@ struct BreathingTextsView: View {
         Text(breathingStrings[currentStringIndex])
             .font(FontViewModel.shared.fontGentiumPlusBoldBody)
             .multilineTextAlignment(.center)
-            .padding()
             .onAppear {
                 Timer.scheduledTimer(withTimeInterval: 12, repeats: true) { timer in
                     withAnimation(.easeInOut(duration: 0.5)) {

@@ -8,22 +8,29 @@
 import SwiftUI
 
 struct HomeView: View {
+    
+    @State private var breathingViewisShowingModal = false
+    
     var body: some View {
         ZStack {
             createBackground()
                 .navigationBarBackButtonHidden(true)
             
-            NavigationLink {
-                BreathingView()
+            Button {
+                breathingViewisShowingModal = true
             } label: {
-                Rectangle().frame(width: 50, height: 50).foregroundColor(.white)
-    .position(x: 100, y: 600)
+                Rectangle().frame(width: 50, height: 50)
+                    .foregroundColor(.white)
+            }.position(x: 100, y: 600)
 
-            }
 
 
 
         }
+        
+        .sheet(isPresented: $breathingViewisShowingModal, content: {
+            BreathingView(isPresented: self.$breathingViewisShowingModal)
+        })
     }
 }
 

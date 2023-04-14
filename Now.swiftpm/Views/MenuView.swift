@@ -54,6 +54,7 @@ struct MenuView: View {
                 }.padding()
                 Text("Now.")
                     .font(fontViewModel.fontGentiumPlusTitle)
+                
                 Spacer()
                 
                 NavigationLink {

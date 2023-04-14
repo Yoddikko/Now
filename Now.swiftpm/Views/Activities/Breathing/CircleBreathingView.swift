@@ -10,9 +10,10 @@ import SwiftUI
 struct CircleBreathingView: View {
     @State private var scale: CGFloat = 0.5
     @State private var isInspiring = true
-    
     @State private var started = false
     
+    @AppStorage("isDarkMode") private var isDarkMode = false
+
     var body: some View {
         if started {
             ZStack {
@@ -35,15 +36,15 @@ struct CircleBreathingView: View {
                 if isInspiring {
                     withAnimation(.easeInOut) {
                         Text("Breathe in")
-                            .font(FontViewModel.shared.fontGentiumPlusTitle4)
-                            .foregroundColor(.white)
+                            .font(FontViewModel.shared.fontGentiumPlusTitle5)
+                            .foregroundColor(isDarkMode ? .black : .white)
                     }
                 } else {
                     withAnimation(.easeInOut) {
                         
                         Text("Breathe out")
-                            .font(FontViewModel.shared.fontGentiumPlusTitle4)
-                            .foregroundColor(.white)
+                            .font(FontViewModel.shared.fontGentiumPlusTitle5)
+                            .foregroundColor(isDarkMode ? .black : .white)
                     }
                 }
             }
@@ -58,8 +59,8 @@ struct CircleBreathingView: View {
                     .scale(0.5)
                 
                 Text("Tap to start")
-                    .foregroundColor(.white)
-                    .font(FontViewModel.shared.fontGentiumPlusTitle4)
+                    .foregroundColor(isDarkMode ? .black : .white)
+                    .font(FontViewModel.shared.fontGentiumPlusTitle5)
                     .onTapGesture {
                         started = true
                     }
