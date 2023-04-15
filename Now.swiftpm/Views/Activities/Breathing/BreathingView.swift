@@ -28,6 +28,8 @@ struct BreathingView: View {
 
                     .font(FontViewModel.shared.fontGentiumPlusBody)
                 
+                Divider()
+                
                 CircleBreathingView()
                 BreathingTextsView()
                 Spacer()

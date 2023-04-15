@@ -1,6 +1,6 @@
 //
 //  Quote.swift
-//  
+//
 //
 //  Created by Ale on 15/04/23.
 //
@@ -21,4 +21,3 @@ extension Quote: Identifiable {
         index
     }
 }
-

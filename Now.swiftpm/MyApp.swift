@@ -2,7 +2,9 @@ import SwiftUI
 
 @main
 struct MyApp: App {
-    let persistence = Persistence.previewFull
+    @StateObject private var persistence = Persistence.shared
+
+//    let persistence = Persistence.shared.saveQuotesFromJSON(context: persistence.container.viewContext)
     @AppStorage("isDarkMode") private var isDarkMode = false
     var body: some Scene {
         WindowGroup {

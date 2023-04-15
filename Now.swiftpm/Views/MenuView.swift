@@ -6,6 +6,10 @@ struct MenuView: View {
     @ObservedObject var musicViewModel = MusicViewModel.shared
     @AppStorage("isDarkMode") private var isDarkMode = false
     
+    @Environment(\.managedObjectContext) private var viewContext
+
+    
+
     var fontViewModel = FontViewModel()
     var body: some View {
         NavigationView {
@@ -79,6 +83,7 @@ struct MenuView: View {
             }
         }.navigationViewStyle(.stack)
             .onAppear {
+                Persistence.shared.saveQuotesFromJSON(context: viewContext)
                 musicViewModel.startBackgroundMusic()
             }
             .onChange(of: musicViewModel.musicToggle) { newState in

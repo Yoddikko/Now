@@ -10,9 +10,7 @@ import SwiftUI
 struct QuoteView: View {
     @Environment(\.managedObjectContext) private var viewContext
     
-    @FetchRequest(sortDescriptors: [
-        NSSortDescriptor(keyPath: \Quote.index, ascending: true)
-    ], animation: .default)
+    @FetchRequest(entity: Quote.entity(),  sortDescriptors: [])
     private var quotes: FetchedResults<Quote>
     
     @State var randomQuote: Quote? = nil
@@ -30,6 +28,8 @@ struct QuoteView: View {
                 .font(FontViewModel.shared.fontGentiumPlusBody)
                 .fixedSize(horizontal: false, vertical: true)
                 .padding(.bottom, 10)
+            
+            Divider()
             
             Text(randomQuote?.text ?? "")
                 .font(FontViewModel.shared.fontGentiumPlusTitle4)
@@ -66,8 +66,10 @@ struct QuoteView: View {
                     
                     
                     Button {
-                        Persistence.shared.toggleQuoteFavorite(index: randomQuote?.index ?? 0)
-                        isFavorite.toggle()
+                        DispatchQueue.main.async {
+                            Persistence.shared.toggleQuoteFavorite(index: randomQuote?.index ?? 0, context: viewContext)
+                            isFavorite.toggle()
+                        }
                         
                     } label: {
                         if isFavorite == true {

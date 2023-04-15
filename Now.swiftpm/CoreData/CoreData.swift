@@ -8,7 +8,10 @@
 import CoreData
 import SwiftUI
 
-class Persistence {
+class Persistence: ObservableObject {
+    
+    @AppStorage("isFirstTime") private var isFirstTime = true
+
     static let shared = Persistence()
 
     
@@ -27,7 +30,7 @@ class Persistence {
         }
         
         if isEmpty {
-            shared.saveQuotesFromJSON()
+            shared.saveQuotesFromJSON(context: context)
         }
         return result
     }()
@@ -35,6 +38,7 @@ class Persistence {
     let container: NSPersistentContainer
 
     init(inMemory: Bool = false) {
+        
         let quoteEntity = NSEntityDescription()
         quoteEntity.name = "Quote"
         quoteEntity.managedObjectClassName = "Quote"
@@ -64,12 +68,11 @@ class Persistence {
 
         let container = NSPersistentContainer(name: "QuoteModel", managedObjectModel: model)
 
-        print(inMemory)
         if inMemory {
             container.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")
-            print(container.persistentStoreDescriptions.first!.url)
         }
 
+        
         container.loadPersistentStores { description, error in
             if let error = error {
                 fatalError("failed with: \(error.localizedDescription)")
@@ -82,7 +85,7 @@ class Persistence {
         self.container = container
     }
     
-    func toggleQuoteFavorite(index: Int) {
+    func toggleQuoteFavorite(index: Int, context: NSManagedObjectContext) {
         let fetchRequest: NSFetchRequest<Quote> = NSFetchRequest<Quote>(entityName: "Quote")
         fetchRequest.predicate = NSPredicate(format: "index == %@", index as NSNumber)
         
@@ -90,7 +93,7 @@ class Persistence {
             let results = try container.viewContext.fetch(fetchRequest)
             if let quote = results.first {
                 quote.favorite.toggle()
-                try container.viewContext.save()
+                try context.save()
             }
         } catch {
             debugPrint(error)
@@ -98,30 +101,34 @@ class Persistence {
     }
     
     
-    func saveQuotesFromJSON() {
-        guard let url = Bundle.main.url(forResource: "stoicquotes", withExtension: "json") else {
-            print("Could not find JSON file")
-            return
-        }
-        
-        do {
-            let data = try Data(contentsOf: url)
-            let json = try JSONSerialization.jsonObject(with: data, options: []) as! [[String:Any]]
-            
-            let context = container.viewContext
-            
-            for quoteData in json {
-                let quote = Quote(context: context)
-                quote.text = quoteData["text"] as! String
-                quote.author = quoteData["author"] as? String
-                quote.favorite = quoteData["favorite"] as! Bool
-                quote.index = quoteData["index"] as! Int
+    func saveQuotesFromJSON(context: NSManagedObjectContext) {
+        if isFirstTime {
+            guard let url = Bundle.main.url(forResource: "stoicquotes", withExtension: "json") else {
+                print("Could not find JSON file")
+                return
             }
             
-            try context.save()
-            
-        } catch let error {
-            print("Error saving quotes: \(error.localizedDescription)")
+            do {
+                let data = try Data(contentsOf: url)
+                let json = try JSONSerialization.jsonObject(with: data, options: []) as! [[String:Any]]
+                
+                let context = container.viewContext
+                
+                for quoteData in json {
+                    let quote = Quote(context: context)
+                    quote.text = quoteData["text"] as! String
+                    quote.author = quoteData["author"] as? String
+                    quote.favorite = quoteData["favorite"] as! Bool
+                    quote.index = quoteData["index"] as! Int
+                }
+                
+                try context.save()
+                isFirstTime = false
+            } catch let error {
+                print("Error saving quotes: \(error.localizedDescription)")
+            }
+        } else {
+            return
         }
     }
 
