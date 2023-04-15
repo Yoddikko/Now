@@ -10,7 +10,8 @@ import SwiftUI
 struct HomeView: View {
     
     @State private var breathingViewisShowingModal = false
-    
+    @State private var quoteViewisShowingModal = false
+
     var body: some View {
         ZStack {
             createBackground()
@@ -22,6 +23,15 @@ struct HomeView: View {
                 Rectangle().frame(width: 50, height: 50)
                     .foregroundColor(.white)
             }.position(x: 100, y: 600)
+            
+            Button {
+                quoteViewisShowingModal = true
+            } label: {
+                Rectangle().frame(width: 50, height: 50)
+                    .foregroundColor(.white)
+            }.position(x: 200, y: 600)
+
+
 
 
 
@@ -31,6 +41,11 @@ struct HomeView: View {
         .sheet(isPresented: $breathingViewisShowingModal, content: {
             BreathingView(isPresented: self.$breathingViewisShowingModal)
         })
+        
+        .sheet(isPresented: $quoteViewisShowingModal, content: {
+            QuoteView(isPresented: self.$quoteViewisShowingModal)
+        })
+
     }
 }
 

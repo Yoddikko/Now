@@ -11,25 +11,24 @@ import SwiftUI
 class Persistence {
     static let shared = Persistence()
 
-    static var isEmpty: Bool {
-        do {
-            let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Quote")
-            let count  = try Persistence(inMemory: false).container.viewContext.count(for: request)
-            return count == 0
-        } catch {
-            return true
-        }
-    }
-
+    
     static let previewFull: Persistence = {
         let result = Persistence(inMemory: false)
         let context = result.container.viewContext
         
+        var isEmpty: Bool {
+            do {
+                let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Quote")
+                let count  = try context.count(for: request)
+                return count == 0
+            } catch {
+                return true
+            }
+        }
         
         if isEmpty {
             shared.saveQuotesFromJSON()
         }
-        
         return result
     }()
 
@@ -68,6 +67,7 @@ class Persistence {
         print(inMemory)
         if inMemory {
             container.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")
+            print(container.persistentStoreDescriptions.first!.url)
         }
 
         container.loadPersistentStores { description, error in
@@ -82,14 +82,21 @@ class Persistence {
         self.container = container
     }
     
-    func toggleQuoteFavorite (quote: Quote) {
+    func toggleQuoteFavorite(index: Int) {
+        let fetchRequest: NSFetchRequest<Quote> = NSFetchRequest<Quote>(entityName: "Quote")
+        fetchRequest.predicate = NSPredicate(format: "index == %@", index as NSNumber)
+        
         do {
-            quote.favorite.toggle()
-            try container.viewContext.save()
+            let results = try container.viewContext.fetch(fetchRequest)
+            if let quote = results.first {
+                quote.favorite.toggle()
+                try container.viewContext.save()
+            }
         } catch {
             debugPrint(error)
         }
     }
+    
     
     func saveQuotesFromJSON() {
         guard let url = Bundle.main.url(forResource: "stoicquotes", withExtension: "json") else {
@@ -119,5 +126,6 @@ class Persistence {
     }
 
 }
+
 
 
