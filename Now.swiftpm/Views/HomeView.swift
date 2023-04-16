@@ -14,7 +14,8 @@ struct HomeView: View {
     
     @State private var journalViewisShowingModal = false
 
-
+    @EnvironmentObject var userData: UserData
+    
     var body: some View {
         ZStack {
             createBackground()

@@ -8,6 +8,10 @@
 import SwiftUI
 
 struct BreathingView: View {
+    @EnvironmentObject var userData: UserData
+    @State private var elapsedSeconds = 0
+    @State private var timer: Timer?
+
     @State var infoViewToggle = false
     @Binding var isPresented : Bool
     var body: some View {
@@ -30,12 +34,16 @@ struct BreathingView: View {
                 
                 Divider()
                 
-                CircleBreathingView()
+                CircleBreathingView( timer: $timer, elapsedSeconds: $elapsedSeconds)
                 BreathingTextsView()
                 Spacer()
                 
                 Button {
                     isPresented = false
+                    SoundViewModel.shared.playCompletionSoundHarp1()
+                    
+                    userData.setBreathing(time: elapsedSeconds)
+                    
                 } label: {
                     Text("I'm ready to go")
                         .font(FontViewModel.shared.fontGentiumPlusTitle4)
@@ -48,6 +56,11 @@ struct BreathingView: View {
 
             }
     }
+    private func stopTimer() {
+        timer?.invalidate()
+        timer = nil
+    }
+    
 }
 
 

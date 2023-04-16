@@ -96,12 +96,15 @@ struct QuoteView: View {
                 
                 Button {
                     isPresented = false
+                    SoundViewModel.shared.playCompletionSoundHarp1()
+
                 } label: {
                     ZStack {
                         
                         Text("I'm ready to go")
                             .font(FontViewModel.shared.fontGentiumPlusTitle4)
                             .padding(.horizontal, 40)
+                        
                     }
                 }
                 .background(RoundedRectangle(cornerRadius: 15)

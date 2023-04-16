@@ -9,6 +9,8 @@ import SwiftUI
 
 struct JournalView: View {
     
+    @EnvironmentObject var userData: UserData
+    
     let textfieldID = UUID()
     
     @State private var keyboardHeight: CGFloat = 0
@@ -60,6 +62,10 @@ struct JournalView: View {
             HStack {
                 Button {
                     isPresented = false
+                    
+                    SoundViewModel.shared.playCompletionSoundHarp1()
+
+                    userData.setJournal(text: text)
                 } label: {
                     
                     Text("I'm ready to go")
@@ -90,6 +96,9 @@ struct JournalView: View {
                     
                 }
         }.scrollDisabled(false)
+            .onAppear {
+                text = userData.getJournal()
+            }
     }
     
     

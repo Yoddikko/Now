@@ -3,14 +3,13 @@ import SwiftUI
 struct MenuView: View {
     
     @State var infoViewToggle = false
-    @ObservedObject var musicViewModel = MusicViewModel.shared
+    @ObservedObject var musicViewModel = SoundViewModel.shared
     @AppStorage("isDarkMode") private var isDarkMode = false
     
     @Environment(\.managedObjectContext) private var viewContext
 
-    
-
     var fontViewModel = FontViewModel()
+    
     var body: some View {
         NavigationView {
             VStack {
@@ -76,10 +75,8 @@ struct MenuView: View {
             }
             .navigationBarTitleDisplayMode(.inline)
             .toolbar(.hidden, for: .navigationBar)
-            .overlay{
-                if infoViewToggle {
-                    InfoView()
-                }
+            .sheet(isPresented: $infoViewToggle) {
+                InfoView()
             }
         }.navigationViewStyle(.stack)
             .onAppear {

@@ -11,7 +11,8 @@ struct CircleBreathingView: View {
     @State private var scale: CGFloat = 0.5
     @State private var isInspiring = true
     @State private var started = false
-    
+    @Binding var timer : Timer?
+    @Binding var elapsedSeconds : Int
     @AppStorage("isDarkMode") private var isDarkMode = false
 
     var body: some View {
@@ -57,22 +58,33 @@ struct CircleBreathingView: View {
             ZStack {
                 Circle()
                     .scale(0.5)
-                    .onTapGesture {
-                        started = true
-                    }
 
                 Text("Tap to start")
                     .foregroundColor(isDarkMode ? .black : .white)
                     .font(FontViewModel.shared.fontGentiumPlusTitle5)
+            }.onTapGesture {
+                started = true
+                startTimer()
             }
+
             
         }
     }
+    
+    private func startTimer() {
+        elapsedSeconds = 0
+        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
+            elapsedSeconds += 1
+        }
+    }
+
+
+
 }
 
 
 struct CircleBreathingView_Previews: PreviewProvider {
     static var previews: some View {
-        CircleBreathingView()
+        CircleBreathingView(timer: .constant(Timer()), elapsedSeconds: .constant(0))
     }
 }
