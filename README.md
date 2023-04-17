@@ -39,6 +39,8 @@ The sounds were created by me using GarageBand.
 | Artworks | Me |
 | Sounds | Me |
 | Music | [Joseph Beg- Let's Be Friends Again](https://www.epidemicsound.com/track/wUAzqQyFpk) (Royalty free) |
+| Font | [Gentium Plus](https://fonts.google.com/specimen/Gentium+Plus) (Open Font License) |
+
 
 ## Bibliography
 
