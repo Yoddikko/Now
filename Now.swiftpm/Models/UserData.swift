@@ -11,6 +11,7 @@ class UserData : ObservableObject {
     var breathing: Int
     var journal: String
     var quote: Quote?
+    var lastQuote: Quote?
     var gratitude: [String]?
     
     init() {

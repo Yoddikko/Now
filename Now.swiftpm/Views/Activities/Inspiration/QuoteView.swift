@@ -118,10 +118,15 @@ struct QuoteView: View {
             if isFavorite {
                 userData.setQuote(quote: randomQuote!)
             }
+            userData.lastQuote = randomQuote!
         }
         
         .onAppear{
-            getRandomQuote()
+            if userData.lastQuote != nil {
+                randomQuote = userData.lastQuote
+            } else {
+                getRandomQuote()
+            }
         }
         .onChange(of: randomQuote?.favorite) { favorite in
             if favorite == true {

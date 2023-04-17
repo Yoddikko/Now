@@ -45,7 +45,7 @@ struct LeaveView: View {
                             .padding(.horizontal, 30)
                             .foregroundColor(.clear)
                         
-                        Text("I'm ready to go")
+                        Text("I'm ready to leave")
                             .font(FontViewModel.shared.fontGentiumPlusTitle4)
                             .foregroundColor(.red)
                     }

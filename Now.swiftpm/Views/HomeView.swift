@@ -28,7 +28,7 @@ struct HomeView: View {
     
     var body: some View {
         ZStack {
-            createBackground()
+            createBackgroundWithDesert(isDarkMode: $isDarkMode)
                 .navigationBarBackButtonHidden(true)
             
             //MARK: Toolbar buttons
@@ -205,16 +205,25 @@ struct HomeView_Preview: PreviewProvider {
 }
 
 @ViewBuilder
-func createBackground() -> some View {
+func createBackgroundWithDesert (isDarkMode: Binding<Bool>) -> some View {
     ZStack {
-        Image("night_sky")
-            .resizable()
-            .accessibilityLabel("Sky")
-
+        if isDarkMode.wrappedValue == false {
+            Image("day_full_sky")
+                .resizable()
+                .accessibilityLabel("Day Sky")
+                .ignoresSafeArea()
+        } else {
+            Image("night_full_sky")
+                .resizable()
+                .accessibilityLabel("Night Sky")
+                .ignoresSafeArea()
+        }
         
         Image("desert")
             .resizable()
             .accessibilityLabel("Desert")
-            
-    }.ignoresSafeArea()
+            .ignoresSafeArea()
+
+    }
 }
+
