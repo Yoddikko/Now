@@ -15,7 +15,7 @@ struct LargeTextField: View {
             
                 .onChange(of: text) { newValue in
                     characterLeft = characterLimit - newValue.count
-
+                    
                     if newValue.count > characterLimit {
                         text = String(newValue.prefix(characterLimit))
                     }
@@ -28,7 +28,7 @@ struct LargeTextField: View {
                 .foregroundColor(.secondary)
                 .padding(.horizontal)
         }
-
+        
     }
 }
 

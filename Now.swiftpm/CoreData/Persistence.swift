@@ -1,5 +1,5 @@
 //
-//  CoreData.swift
+//  Persistence.swift
 //  
 //
 //  Created by Ale on 15/04/23.
@@ -11,9 +11,8 @@ import SwiftUI
 class Persistence: ObservableObject {
     
     @AppStorage("isFirstTime") private var isFirstTime = true
-
+    
     static let shared = Persistence()
-
     
     static let previewFull: Persistence = {
         let result = Persistence(inMemory: false)
@@ -34,9 +33,9 @@ class Persistence: ObservableObject {
         }
         return result
     }()
-
+    
     let container: NSPersistentContainer
-
+    
     init(inMemory: Bool = false) {
         
         let quoteEntity = NSEntityDescription()
@@ -47,42 +46,94 @@ class Persistence: ObservableObject {
         nameAttribute.name = "text"
         nameAttribute.type = .string
         quoteEntity.properties.append(nameAttribute)
-
+        
         let authorAttribute = NSAttributeDescription()
         authorAttribute.name = "author"
         authorAttribute.type = .string
         quoteEntity.properties.append(authorAttribute)
-
+        
         let favoriteAttribute = NSAttributeDescription()
         favoriteAttribute.name = "favorite"
         favoriteAttribute.type = .boolean
         quoteEntity.properties.append(favoriteAttribute)
-
+        
         let indexAttribute = NSAttributeDescription()
         indexAttribute.name = "index"
         indexAttribute.type = .integer64
         quoteEntity.properties.append(indexAttribute)
+        
+
+
+        let userDataEntity = NSEntityDescription()
+        userDataEntity.name = "UserDataEntity"
+        userDataEntity.managedObjectClassName = "UserDataEntity"
+
+        let breathingAttribute = NSAttributeDescription()
+        breathingAttribute.name = "breathing"
+        breathingAttribute.type = .integer64
+        userDataEntity.properties.append(breathingAttribute)
+
+        let journalAttribute = NSAttributeDescription()
+        journalAttribute.name = "journal"
+        journalAttribute.type = .string
+        userDataEntity.properties.append(journalAttribute)
+
+        let quoteIndexAttribute = NSAttributeDescription()
+        quoteIndexAttribute.name = "quoteIndex"
+        quoteIndexAttribute.type = .integer64
+        userDataEntity.properties.append(quoteIndexAttribute)
+
+        let gratitude1Attribute = NSAttributeDescription()
+        gratitude1Attribute.name = "gratitude1"
+        gratitude1Attribute.type = .string
+        userDataEntity.properties.append(gratitude1Attribute)
+
+        let gratitude2Attribute = NSAttributeDescription()
+        gratitude2Attribute.name = "gratitude2"
+        gratitude2Attribute.type = .string
+        userDataEntity.properties.append(gratitude2Attribute)
+
+        let gratitude3Attribute = NSAttributeDescription()
+        gratitude3Attribute.name = "gratitude3"
+        gratitude3Attribute.type = .string
+        userDataEntity.properties.append(gratitude3Attribute)
+        
+        let uuidAttribute = NSAttributeDescription()
+        uuidAttribute.name = "uuid"
+        uuidAttribute.type = .uuid
+        userDataEntity.properties.append(uuidAttribute)
+        
+        let dateAttribute = NSAttributeDescription()
+        dateAttribute.name = "date"
+        dateAttribute.type = .string
+        userDataEntity.properties.append(dateAttribute)
+
+
 
         let model = NSManagedObjectModel()
-        model.entities = [quoteEntity]
-
-        let container = NSPersistentContainer(name: "QuoteModel", managedObjectModel: model)
+        model.entities = [quoteEntity, userDataEntity]
+        
+        let container = NSPersistentContainer(name: "Now", managedObjectModel: model)
+        
+        
+        
 
         if inMemory {
             container.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")
         }
-
+        
         
         container.loadPersistentStores { description, error in
             if let error = error {
                 fatalError("failed with: \(error.localizedDescription)")
             }
         }
-
+        
         container.viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
-
+        
         container.viewContext.automaticallyMergesChangesFromParent = true
         self.container = container
+                
     }
     
     func toggleQuoteFavorite(index: Int, context: NSManagedObjectContext) {
@@ -131,7 +182,25 @@ class Persistence: ObservableObject {
             return
         }
     }
-
+    
+    
+    func saveUserData(context: NSManagedObjectContext, userData: UserData) {
+        let userDataEntity = UserDataEntity(context: context)
+        userDataEntity.breathing = userData.breathing
+        userDataEntity.gratitude1 = userData.gratitude?[0] ?? ""
+        userDataEntity.gratitude2 = userData.gratitude?[1] ?? ""
+        userDataEntity.gratitude3 = userData.gratitude?[2] ?? ""
+        userDataEntity.journal = userData.journal
+        userDataEntity.uuid = UUID()
+        userDataEntity.quoteIndex = userData.quote?.index ?? -1
+        userDataEntity.date = Date().description
+        do {
+            try context.save()
+        } catch {
+            debugPrint(error.localizedDescription)
+        }
+    }
+    
 }
 
 

@@ -10,10 +10,13 @@ import Foundation
 class UserData : ObservableObject {
     var breathing: Int
     var journal: String
+    var quote: Quote?
+    var gratitude: [String]?
     
     init() {
-        breathing = 0
-        journal = ""
+        self.breathing = 0
+        self.journal = ""
+        self.quote = nil
     }
     
     func setBreathing(time: Int) {
@@ -24,15 +27,34 @@ class UserData : ObservableObject {
         }
     }
     
-    func setJournal(text: String) {
+    func setJournalText(text: String) {
         self.journal = text
     }
     
-    func getJournal() -> String {
+    func getJournalText() -> String {
         return self.journal
     }
     
-    func getBreathing() -> Int {
+    func getBreathingTime() -> Int {
         return self.breathing
     }
+    
+    func setGratitudeStrings(strings: [String]) {
+        self.gratitude = []
+        for string in strings {
+            if !string.isEmpty {
+                self.gratitude?.append(string)
+            }
+        }
+    }
+    
+    func getGratitudeStrings() -> [String] {
+        return self.gratitude ?? ["","",""]
+    }
+    
+    func setQuote(quote: Quote) {
+        self.quote = quote
+    }
 }
+
+

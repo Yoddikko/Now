@@ -14,7 +14,7 @@ struct CircleBreathingView: View {
     @Binding var timer : Timer?
     @Binding var elapsedSeconds : Int
     @AppStorage("isDarkMode") private var isDarkMode = false
-
+    
     var body: some View {
         if started {
             ZStack {
@@ -58,7 +58,7 @@ struct CircleBreathingView: View {
             ZStack {
                 Circle()
                     .scale(0.5)
-
+                
                 Text("Tap to start")
                     .foregroundColor(isDarkMode ? .black : .white)
                     .font(FontViewModel.shared.fontGentiumPlusTitle5)
@@ -66,7 +66,7 @@ struct CircleBreathingView: View {
                 started = true
                 startTimer()
             }
-
+            
             
         }
     }
@@ -77,9 +77,9 @@ struct CircleBreathingView: View {
             elapsedSeconds += 1
         }
     }
-
-
-
+    
+    
+    
 }
 
 

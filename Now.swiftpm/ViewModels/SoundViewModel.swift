@@ -15,7 +15,7 @@ class SoundViewModel : ObservableObject {
     
     var musicPlayer: AVAudioPlayer?
     var soundPlayer: AVAudioPlayer?
-
+    
     func startBackgroundMusic() {
         if let bundle = Bundle.main.path(forResource: "ES_Let's Be Friends Again - Joseph Beg", ofType: "mp3") {
             let backgroundMusic = NSURL(fileURLWithPath: bundle)
@@ -24,7 +24,7 @@ class SoundViewModel : ObservableObject {
                 guard let musicPlayer = musicPlayer else { return }
                 musicPlayer.numberOfLoops = -1
                 musicPlayer.prepareToPlay()
-//                musicPlayer.play()
+                musicPlayer.play()
             } catch {
                 print(error)
             }
@@ -37,10 +37,10 @@ class SoundViewModel : ObservableObject {
     }
     
     func playCompletionSoundHarp1() {
-        soundPlayer = try! AVAudioPlayer(contentsOf: URL(fileURLWithPath: Bundle.main.path(forResource: "harp_2", ofType: "mp3")!))
+        soundPlayer = try! AVAudioPlayer(contentsOf: URL(fileURLWithPath: Bundle.main.path(forResource: "harp_1", ofType: "mp3")!))
         soundPlayer?.prepareToPlay()
         soundPlayer?.play()
     }
     
-        
+    
 }

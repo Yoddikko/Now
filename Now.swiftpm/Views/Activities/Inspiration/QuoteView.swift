@@ -10,6 +10,8 @@ import SwiftUI
 struct QuoteView: View {
     @Environment(\.managedObjectContext) private var viewContext
     
+    @EnvironmentObject var userData: UserData
+    
     @FetchRequest(entity: Quote.entity(),  sortDescriptors: [])
     private var quotes: FetchedResults<Quote>
     
@@ -57,8 +59,6 @@ struct QuoteView: View {
                         Text("Enlight me")
                             .font(FontViewModel.shared.fontGentiumPlusTitle4)
                             .padding(.horizontal, 30)
-                        
-                        
                     }
                     .background(RoundedRectangle(cornerRadius: 15)
                         .foregroundColor(.secondary.opacity(0.1))
@@ -97,7 +97,7 @@ struct QuoteView: View {
                 Button {
                     isPresented = false
                     SoundViewModel.shared.playCompletionSoundHarp1()
-
+                    
                 } label: {
                     ZStack {
                         
@@ -113,7 +113,14 @@ struct QuoteView: View {
             }.padding()
             
             
-        }.onAppear{
+        }.onDisappear {
+            print(isPresented)
+            if isFavorite {
+                userData.setQuote(quote: randomQuote!)
+            }
+        }
+        
+        .onAppear{
             getRandomQuote()
         }
         .onChange(of: randomQuote?.favorite) { favorite in

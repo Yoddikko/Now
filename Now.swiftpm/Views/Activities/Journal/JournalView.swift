@@ -64,8 +64,8 @@ struct JournalView: View {
                     isPresented = false
                     
                     SoundViewModel.shared.playCompletionSoundHarp1()
-
-                    userData.setJournal(text: text)
+                    
+                    userData.setJournalText(text: text)
                 } label: {
                     
                     Text("I'm ready to go")
@@ -95,10 +95,15 @@ struct JournalView: View {
                     }
                     
                 }
-        }.scrollDisabled(false)
-            .onAppear {
-                text = userData.getJournal()
-            }
+        }
+        .scrollDisabled(false)
+        .onDisappear {
+            userData.setJournalText(text: text)
+        }
+        
+        .onAppear {
+            text = userData.getJournalText()
+        }
     }
     
     
