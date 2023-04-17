@@ -45,5 +45,9 @@ The sounds were created by me using GarageBand.
 - [Relaxation techniques: Breath control helps quell errant stress response](https://www.health.harvard.edu/mind-and-mood/relaxation-techniques-breath-control-helps-quell-errant-stress-response)
 - [See how mindfulness helps you live in the moment.](https://www.mayoclinic.org/healthy-lifestyle/consumer-health/in-depth/mindfulness-exercises/art-20046356)
 
+- [How gratitude changes you and your brain](https://greatergood.berkeley.edu/article/item/how_gratitude_changes_you_and_your_brain)
 
+- [How Journaling Can Help You in Hard Times](https://greatergood.berkeley.edu/article/item/how_journaling_can_help_you_in_hard_times)
+
+- [Stoicism](https://plato.stanford.edu/entries/stoicism/)
 
