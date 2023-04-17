@@ -27,7 +27,7 @@ Even in the middle of the chaos of daily life, it offers a secure space to conte
 
 ## How I built it
 
-I wanted to create an experience that was relaxing and pleasing to the eye. I set out to create simple but pleasing illustrations, following an artistic direction. All illlustrations were created by me. The font I used is called 'Gentium Plus'. This experience is built entirely using the **SwiftUI** framework to build the interface. For the sounds and background music, I used the **AVFoundation** framework. The app uses also **CoreData** for the persistence of the data. The whole project was built using the latest design patterns (**MVVM**) and good code pratices. Finally, I tried to make the app accessible by using accessibilityLabels.
+I wanted to create an experience that was relaxing and pleasing to the eye. I set out to create simple but pleasing illustrations, following an artistic direction. All illlustrations were created by me. The font I used is called 'Gentium Plus'. This experience is built entirely using the **SwiftUI** framework to build the interface. For the sounds and background music, I used the **AVFoundation** framework. The app uses also **CoreData** for the persistence of the data. The whole project was built using the latest design patterns (**MVVM**) and good code pratices. Finally, I tried to make the app accessible by using **accessibilityLabels**.
 
 ## Assets
 
