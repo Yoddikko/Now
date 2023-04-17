@@ -1,4 +1,4 @@
-# Now.
+# Now. (WWDC2023)
 ## _Your safe space_
 
 Even in the midst of chaos, we can maintain our mental and emotional health by practicing inner serenity and tranquility. Take a deep breath, find a quiet location, and keep in mind that you have the capacity to choose how you respond to the world around you if you're feeling overburdened by the busyness of modern life.
@@ -40,7 +40,7 @@ The sounds were created by me using GarageBand.
 | Sounds | Me |
 | Music | [Joseph Beg- Let's Be Friends Again](https://www.epidemicsound.com/track/wUAzqQyFpk) (Royalty free) |
 
-## External links
+## Bibliography
 
 - [Relaxation techniques: Breath control helps quell errant stress response](https://www.health.harvard.edu/mind-and-mood/relaxation-techniques-breath-control-helps-quell-errant-stress-response)
 - [See how mindfulness helps you live in the moment.](https://www.mayoclinic.org/healthy-lifestyle/consumer-health/in-depth/mindfulness-exercises/art-20046356)
