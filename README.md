@@ -38,7 +38,7 @@ The sounds were created by me using GarageBand.
 | ------ | ------ |
 | Artworks | Me |
 | Sounds | Me |
-| Music | [Lama House - Arc of Transcendence](https://www.epidemicsound.com/track/GMAsGEJtK8/) (Royalty free) |
+| Music | [Lama House - Arc of Transcendence](https://www.epidemicsound.com/track/GMAsGEJtK8/) [Licensed] |
 | Font | [Gentium Plus](https://fonts.google.com/specimen/Gentium+Plus) (Open Font License) |
 
 
