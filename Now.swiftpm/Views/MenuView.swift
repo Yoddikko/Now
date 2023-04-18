@@ -12,6 +12,8 @@ struct MenuView: View {
     
     @State private var opacity: Double = 1.0
     
+    @State var showUserDataHistory = false
+    
     var fontViewModel = FontViewModel()
     
     var body: some View {
@@ -51,6 +53,20 @@ struct MenuView: View {
                         }
                         .background(.regularMaterial)
                         .cornerRadius(10)
+                        
+                        
+                        Button {
+                            withAnimation {
+                                showUserDataHistory = true
+                            }
+                        } label: {
+                            Image(systemName: "clock.arrow.circlepath")
+                                .accessibilityLabel("Entry history")
+                                .padding(10)
+                        }
+                        .background(.regularMaterial)
+                        .cornerRadius(10)
+
                         
                         Spacer()
                         
@@ -104,7 +120,12 @@ struct MenuView: View {
                 }
                 createBlackOverlay(opacity: $opacity)
             }
-        }.sheet(isPresented: $stoicismViewShowingModal, content: {
+        }
+        .sheet(isPresented: $showUserDataHistory, content: {
+            UserDataEntries(isPresented: $showUserDataHistory)
+        })
+
+        .sheet(isPresented: $stoicismViewShowingModal, content: {
             StoicismView(isPresented: $stoicismViewShowingModal)
         })
         .navigationViewStyle(.stack)

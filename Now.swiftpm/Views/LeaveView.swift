@@ -16,48 +16,55 @@ struct LeaveView: View {
     
     var body: some View {
         VStack {
+            Spacer()
             Text("Are you ready to leave?")
                 .font(FontViewModel.shared.fontGentiumPlusTitle3)
             
             
             Spacer()
             VStack (spacing: 10) {
-//                Button {
-//                    Persistence.shared.saveUserData(context: viewContext, userData: userData)
-//                } label: {
-//                    ZStack {
-//                        Text("Save today's data")
-//                            .font(FontViewModel.shared.fontGentiumPlusTitle4)
-//                            .padding(.horizontal, 30)
-//                    }
-//                }
-//                .background(RoundedRectangle(cornerRadius: 15)
-//                    .foregroundColor(.secondary.opacity(0.1))
-//                )
-                
-                
                 Button {
+                    isPresented = false
+                } label: {
+                    ZStack {
+                        Text("I'm not ready to leave")
+                            .font(FontViewModel.shared.fontGentiumPlusTitle4)
+                            .foregroundColor(.orange)
+                            .padding(.horizontal)
+                    }
+                    .background(RoundedRectangle(cornerRadius: 15)
+                        .foregroundColor(.secondary.opacity(0.1))
+                    )
+                    
+
+                }
+                Button {
+                    Persistence.shared.saveUserData(context: viewContext, userData: userData)
                     showRecap = true
                 } label: {
                     ZStack {
-                        Text("Save today's data")
+                        
+                        Text("I'm not ready to leave")
                             .font(FontViewModel.shared.fontGentiumPlusTitle4)
-                            .padding(.horizontal, 30)
+                            .padding(.horizontal)
                             .foregroundColor(.clear)
                         
                         Text("I'm ready to leave")
                             .font(FontViewModel.shared.fontGentiumPlusTitle4)
                             .foregroundColor(.red)
+                            .padding(.horizontal)
                     }
                 }
                 .background(RoundedRectangle(cornerRadius: 15)
                     .foregroundColor(.red.opacity(0.2))
                 )
                 .padding(.bottom)
-            } .fullScreenCover(isPresented: $showRecap, content: {
+            }
+            .fullScreenCover(isPresented: $showRecap, content: {
                 RecapView()
             })
-        }
+        }.presentationDetents([.medium])
+        
           
 
     }

@@ -8,7 +8,7 @@ struct MyApp: App {
     @AppStorage("isDarkMode") private var isDarkMode = false
     var body: some Scene {
         WindowGroup {
-            MenuView()
+        MenuView()
                 .preferredColorScheme(isDarkMode ? .dark : .light)
                 .environment(\.managedObjectContext, persistence.container.viewContext)
                 .environmentObject(userData)

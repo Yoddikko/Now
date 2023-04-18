@@ -67,7 +67,7 @@ struct IntroView: View {
                 }
             
             
-            Text("When you are ready to leave you can walk through the door.")
+            Text("When you are ready to leave you can walk the stairs through the door.")
                 .font(FontViewModel.shared.fontGentiumPlusTitle4)
                 .opacity(leaveTextOpacity)
                 .multilineTextAlignment(.center)

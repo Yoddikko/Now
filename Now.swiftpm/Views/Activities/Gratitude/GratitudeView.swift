@@ -24,27 +24,35 @@ struct GratitudeView: View {
     
     var body: some View {
         ScrollViewReader { value in
-            
-            Text("Be grateful.")
-                .font(FontViewModel.shared.fontGentiumPlusTitle3)
-                .opacity(textOpacity)
-            
-            Text("Take a look at what you have, don't chase what you don't have.")
-                .padding(.horizontal)
-                .padding(.bottom, 1)
-                .multilineTextAlignment(.center)
-                .opacity(textOpacity)
-                .font(FontViewModel.shared.fontGentiumPlusItalicBody)
-                .foregroundColor(.secondary)
-            
-            
-            Text("When we take the time to focus on what we have rather than what we lack, we cultivate a sense of abundance and appreciation for the present moment. Gratitude can also help us shift our perspective from one of self-centeredness to one of generosity and compassion, as we become more attuned to the needs and experiences of others")
-                .padding(.horizontal)
-                .font(FontViewModel.shared.fontGentiumPlusBody)
-                .opacity(textOpacity)
-            
-            Divider()
-            
+            VStack {
+                Text("Be grateful.")
+                    .font(FontViewModel.shared.fontGentiumPlusTitle3)
+                    .opacity(textOpacity)
+                
+                Text("Take a look at what you have, don't chase what you don't have.")
+                    .padding(.horizontal)
+                    .padding(.bottom, 1)
+                    .multilineTextAlignment(.center)
+                    .opacity(textOpacity)
+                    .font(FontViewModel.shared.fontGentiumPlusItalicBody)
+                    .foregroundColor(.secondary)
+                
+                
+                Text("When we take the time to focus on what we have rather than what we lack, we cultivate a sense of abundance and appreciation for the present moment. Gratitude can also help us shift our perspective from one of self-centeredness to one of generosity and compassion, as we become more attuned to the needs and experiences of others")
+                    .padding(.horizontal)
+                    .font(FontViewModel.shared.fontGentiumPlusBody)
+                    .opacity(textOpacity)
+                
+                Divider()
+            }
+            .background{
+                Rectangle().foregroundColor(.gray)
+                    .opacity(0.000000000000000001)
+                    .onTapGesture {
+                        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                    }
+            }
+
             VStack (spacing: 30) {
                 HStack (spacing: 40) {
                     Spacer()

@@ -14,10 +14,12 @@ class UserData : ObservableObject {
     var lastQuote: Quote?
     var gratitude: [String]?
     
-    init() {
-        self.breathing = 0
-        self.journal = ""
-        self.quote = nil
+    init(breathing: Int = 0, journal: String = "", quote: Quote? = nil, lastQuote: Quote? = nil, gratitude: [String] = []) {
+        self.breathing = breathing
+        self.journal = journal
+        self.quote = quote
+        self.lastQuote = lastQuote
+        self.gratitude = gratitude
     }
     
     func setBreathing(time: Int) {

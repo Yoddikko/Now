@@ -10,6 +10,8 @@ import SwiftUI
 
 class Persistence: ObservableObject {
     
+    var userDataEntries = [UserDataEntity]()
+    
     @AppStorage("isFirstTime") private var isFirstTime = true
     
     static let shared = Persistence()
@@ -150,7 +152,36 @@ class Persistence: ObservableObject {
             debugPrint(error)
         }
     }
-    
+        
+    func fetchUserDataEntities(context: NSManagedObjectContext) -> [UserDataEntity]? {
+        let fetchRequest: NSFetchRequest<UserDataEntity> = NSFetchRequest<UserDataEntity>(entityName: "UserDataEntity")
+        
+        do {
+            var results = try container.viewContext.fetch(fetchRequest)
+            
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss Z" // formato della data come stringa
+            results.sort(by: { (first, second) -> Bool in
+                if let firstDate = dateFormatter.date(from: first.date), let secondDate = dateFormatter.date(from: second.date) {
+                    
+                    
+                    return firstDate > secondDate // ordine decrescente, dal più recente
+                } else {
+                    return false // in caso di errori durante la conversione delle date, mantieni l'ordine attuale
+                }
+            })
+            try container.viewContext.save()
+            userDataEntries.append(contentsOf: results)
+            return results
+            
+        
+    } catch {
+        debugPrint(error)
+    }
+        return []
+}
+
+
     
     func saveQuotesFromJSON(context: NSManagedObjectContext) {
         if isFirstTime {
@@ -183,13 +214,48 @@ class Persistence: ObservableObject {
         }
     }
     
+    func castUserData(userDataEntity: UserDataEntity) -> UserData {
+        var gratitude : [String] = []
+        if userDataEntity.gratitude1 != "" {
+            gratitude.append(userDataEntity.gratitude1)
+        }
+        if userDataEntity.gratitude2 != "" {
+            gratitude.append(userDataEntity.gratitude2)
+        }
+        if userDataEntity.gratitude3 != "" {
+            gratitude.append(userDataEntity.gratitude3)
+        }
+        
+        let userData = UserData(breathing: userDataEntity.breathing, journal: userDataEntity.journal, gratitude: gratitude)
+        return userData
+    }
     
+    func getUserData (uuid: UUID) -> UserData? {
+        var castedUserData = UserData()
+        var userDataEntity = userDataEntries.first(where: {
+            $0.id == uuid
+        })
+        castedUserData = castUserData(userDataEntity: userDataEntity!)
+
+        return castedUserData
+        
+    }
+        
     func saveUserData(context: NSManagedObjectContext, userData: UserData) {
         let userDataEntity = UserDataEntity(context: context)
         userDataEntity.breathing = userData.breathing
-        userDataEntity.gratitude1 = userData.gratitude?[0] ?? ""
-        userDataEntity.gratitude2 = userData.gratitude?[1] ?? ""
-        userDataEntity.gratitude3 = userData.gratitude?[2] ?? ""
+        if userData.gratitude?.count == 1 {
+            userDataEntity.gratitude1 = userData.gratitude?[0] ?? ""
+        }
+        if userData.gratitude?.count == 2 {
+            userDataEntity.gratitude1 = userData.gratitude?[1] ?? ""
+        }
+        
+        if userData.gratitude?.count == 3 {
+            userDataEntity.gratitude1 = userData.gratitude?[2] ?? ""
+        }
+
+        
         userDataEntity.journal = userData.journal
         userDataEntity.uuid = UUID()
         userDataEntity.quoteIndex = userData.quote?.index ?? -1
@@ -200,8 +266,5 @@ class Persistence: ObservableObject {
             debugPrint(error.localizedDescription)
         }
     }
-    
 }
-
-
 

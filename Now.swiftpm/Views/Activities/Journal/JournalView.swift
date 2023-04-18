@@ -28,33 +28,40 @@ struct JournalView: View {
     var body: some View {
         
         ScrollViewReader { value in
-            
-            Text("Compose.")
-                .font(FontViewModel.shared.fontGentiumPlusTitle3)
-                .opacity(textOpacity)
-            
-            Text("Write something down. Anything. Writing down my thoughts helped me gain clarity in my mind, I started by describing my days and feelings.")
-                .padding(.horizontal)
-                .padding(.bottom, 1)
-                .multilineTextAlignment(.center)
-                .opacity(textOpacity)
-                .font(FontViewModel.shared.fontGentiumPlusItalicBody)
-                .foregroundColor(.secondary)
-            
-            
-            Text("Taking a few minutes each day to write down thoughts, feelings, and experiences can help reduce stress, increase self-awareness, and improve overall well-being. Journaling can also provide a space for reflection and problem-solving, as well as a way to track progress towards personal goals. Journaling can enhance creativity and serve as a way to preserve memories.")
-                .padding(.horizontal)
-                .font(FontViewModel.shared.fontGentiumPlusBody)
-                .opacity(textOpacity)
-            
-            Divider()
-            
-            Text(getFormattedDate())
-                .font(FontViewModel.shared.fontGentiumPlusTitle4)
-                .padding(.top, 30)
-                .padding(.bottom, -10)
-            
-            
+            VStack {
+                Text("Compose.")
+                    .font(FontViewModel.shared.fontGentiumPlusTitle3)
+                    .opacity(textOpacity)
+                
+                Text("Write something down. Anything. Writing down my thoughts helped me gain clarity in my mind, I started by describing my days and feelings.")
+                    .padding(.horizontal)
+                    .padding(.bottom, 1)
+                    .multilineTextAlignment(.center)
+                    .opacity(textOpacity)
+                    .font(FontViewModel.shared.fontGentiumPlusItalicBody)
+                    .foregroundColor(.secondary)
+                
+                
+                Text("Taking a few minutes each day to write down thoughts, feelings, and experiences can help reduce stress, increase self-awareness, and improve overall well-being. Journaling can also provide a space for reflection and problem-solving, as well as a way to track progress towards personal goals. Journaling can enhance creativity and serve as a way to preserve memories.")
+                    .padding(.horizontal)
+                    .font(FontViewModel.shared.fontGentiumPlusBody)
+                    .opacity(textOpacity)
+                
+                Divider()
+                
+                Text(getFormattedDate())
+                    .font(FontViewModel.shared.fontGentiumPlusTitle4)
+                    .padding(.top, 30)
+                    .padding(.bottom, -10)
+                
+            }
+            .background{
+                Rectangle().foregroundColor(.gray)
+                    .opacity(0.000000000000000001)
+                    .onTapGesture {
+                        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                    }
+            }
             LargeTextField(text: $text)
             
             Spacer()

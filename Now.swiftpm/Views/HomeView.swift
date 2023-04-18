@@ -15,6 +15,7 @@ struct HomeView: View {
     
     @EnvironmentObject var userData: UserData
 
+    @State var showUserDataHistory = false
     
     //MARK: Sheet toggles
     @State var infoViewToggle = false
@@ -113,7 +114,7 @@ struct HomeView: View {
                     .scaledToFit()
                     .frame(width: 200, height: 200)
             }
-            .position(x: UIScreen.main.bounds.width - 1000, y: UIScreen.main.bounds.height - 500)
+            .position(x: UIScreen.main.bounds.width - 800, y: UIScreen.main.bounds.height - 450)
             .accessibilityLabel("Breathing activity")
             
             //MARK: COLUMN - QUOTES ACTIVITY
@@ -139,7 +140,7 @@ struct HomeView: View {
                     .scaledToFit()
                     .frame(width: 250, height: 250)
             }
-            .position(x: UIScreen.main.bounds.width - 250, y: UIScreen.main.bounds.height - 200)
+            .position(x: UIScreen.main.bounds.width - 170, y: UIScreen.main.bounds.height - 150)
 
             .accessibilityLabel("Journal activity")
 
@@ -152,7 +153,7 @@ struct HomeView: View {
                     .scaledToFit()
                     .frame(width: 250, height: 300)
             }
-            .position(x: UIScreen.main.bounds.width - 390, y: UIScreen.main.bounds.height - 500)
+            .position(x: UIScreen.main.bounds.width - 300, y: UIScreen.main.bounds.height - 500)
 
                 .accessibilityLabel("Journal activity")
 
@@ -167,7 +168,7 @@ struct HomeView: View {
                     .scaledToFit()
                     .frame(width: 150, height: 150)
             }
-            .position(x: UIScreen.main.bounds.width - 750, y: UIScreen.main.bounds.height - 400)
+            .position(x: UIScreen.main.bounds.width - 500, y: UIScreen.main.bounds.height - 300)
 
             .accessibilityLabel("Gratitude activity")
         }
@@ -192,15 +193,14 @@ struct HomeView: View {
             StoicismView(isPresented: self.$stoicismViewShowingModal)
         })
         
-        .sheet(isPresented: $leaveViewisShowingModal, content: {
-            LeaveView(isPresented: self.$leaveViewisShowingModal)
-        })
-        
-        
-        
         .sheet(isPresented: $infoViewToggle, content: {
             InfoView()
         })
+        
+        .sheet(isPresented: $leaveViewisShowingModal, content: {
+            LeaveView(isPresented: self.$leaveViewisShowingModal)
+        })
+
         
         
         

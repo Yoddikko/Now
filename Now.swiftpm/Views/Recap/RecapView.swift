@@ -40,9 +40,9 @@ struct RecapView: View {
                         }
                 }
                 
-                if userData.gratitude != nil {
+                if userData.gratitude?.count ?? 0 > 0 {
                     VStack {
-                        Text("Today I was gretful for...")
+                        Text("Today I was grateful for...")
                             .font(FontViewModel.shared.fontGentiumPlusTitle4).padding([.top, .bottom])
                         
                         HStack(alignment: .center, spacing: 125) {
