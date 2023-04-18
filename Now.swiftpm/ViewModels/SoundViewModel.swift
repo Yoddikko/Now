@@ -17,7 +17,7 @@ class SoundViewModel : ObservableObject {
     var soundPlayer: AVAudioPlayer?
     
     func startBackgroundMusic() {
-        if let bundle = Bundle.main.path(forResource: "ES_Let's Be Friends Again - Joseph Beg", ofType: "mp3") {
+        if let bundle = Bundle.main.path(forResource: "ES_Arc of Transcendence - Lama House", ofType: "mp3") {
             let backgroundMusic = NSURL(fileURLWithPath: bundle)
             do {
                 musicPlayer = try AVAudioPlayer(contentsOf:backgroundMusic as URL)

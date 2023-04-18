@@ -31,7 +31,7 @@ struct JournalView: View {
             
             Text("Compose.")
                 .font(FontViewModel.shared.fontGentiumPlusTitle3)
-            
+                .opacity(textOpacity)
             
             Text("Write something down. Anything. Writing down my thoughts helped me gain clarity in my mind, I started by describing my days and feelings.")
                 .padding(.horizontal)
@@ -105,16 +105,15 @@ struct JournalView: View {
             text = userData.getJournalText()
         }
     }
-    
-    
-    func getFormattedDate() -> String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd MMMM"
-        return dateFormatter.string(from: Date())
-    }
-    
-    
 }
+
+func getFormattedDate() -> String {
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "dd MMMM"
+    return dateFormatter.string(from: Date())
+}
+
+
 
 struct JournalView_previews: PreviewProvider {
     static var previews: some View {

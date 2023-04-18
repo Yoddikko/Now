@@ -12,8 +12,7 @@ struct IntroView: View {
             
             Spacer()
             Text("Welcome to my safe space.")
-                .font(FontViewModel.shared.fontGentiumPlusTitle3)
-                .foregroundColor(.white)
+                .font(FontViewModel.shared.fontGentiumPlusTitle4)
                 .multilineTextAlignment(.center)
                 .opacity(welcomeTextOpacity)
                 .animation(.easeInOut(duration: 1.0))
@@ -27,8 +26,7 @@ struct IntroView: View {
             
             
             Text("You'll have to forgive me if it's a little messy....")
-                .font(FontViewModel.shared.fontGentiumPlusTitle3)
-                .foregroundColor(.white)
+                .font(FontViewModel.shared.fontGentiumPlusTitle4)
                 .opacity(forgiveTextOpacity)
                 .multilineTextAlignment(.center)
                 .animation(.easeInOut(duration: 1.0))
@@ -42,8 +40,7 @@ struct IntroView: View {
             
             
             Text("But I'm sure you'll like it.")
-                .font(FontViewModel.shared.fontGentiumPlusTitle3)
-                .foregroundColor(.white)
+                .font(FontViewModel.shared.fontGentiumPlusTitle4)
                 .opacity(likeTextOpacity)
                 .multilineTextAlignment(.center)
                 .animation(.easeInOut(duration: 1.0))
@@ -57,8 +54,7 @@ struct IntroView: View {
             
             
             Text("You can interact with my relics and enjoy your stay.")
-                .font(FontViewModel.shared.fontGentiumPlusTitle3)
-                .foregroundColor(.white)
+                .font(FontViewModel.shared.fontGentiumPlusTitle4)
                 .opacity(interactTextOpacity)
                 .multilineTextAlignment(.center)
                 .animation(.easeInOut(duration: 1.0))
@@ -72,8 +68,7 @@ struct IntroView: View {
             
             
             Text("When you are ready to leave you can walk through the door.")
-                .font(FontViewModel.shared.fontGentiumPlusTitle3)
-                .foregroundColor(.white)
+                .font(FontViewModel.shared.fontGentiumPlusTitle4)
                 .opacity(leaveTextOpacity)
                 .multilineTextAlignment(.center)
                 .animation(.easeInOut(duration: 1.0))
@@ -85,6 +80,7 @@ struct IntroView: View {
                     }
                 }
             
+            Spacer()
             
             NavigationLink {
                 HomeView()
@@ -100,10 +96,7 @@ struct IntroView: View {
                 .navigationBarBackButtonHidden(true)
 
             
-            Spacer()
-        }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(Color.black)
+        }.padding()
         .edgesIgnoringSafeArea(.all)
     }
 }

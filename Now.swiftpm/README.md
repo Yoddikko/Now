@@ -1,7 +1,4 @@
 # Now. (WWDC2023)
-
-GitHub link: https://github.com/Yoddikko/Now.
-
 ## _Your safe space_
 
 Even in the midst of chaos, we can maintain our mental and emotional health by practicing inner serenity and tranquility. Take a deep breath, find a quiet location, and keep in mind that you have the capacity to choose how you respond to the world around you if you're feeling overburdened by the busyness of modern life.
@@ -41,7 +38,7 @@ The sounds were created by me using GarageBand.
 | ------ | ------ |
 | Artworks | Me |
 | Sounds | Me |
-| Music | [Joseph Beg- Let's Be Friends Again](https://www.epidemicsound.com/track/wUAzqQyFpk) (Royalty free) |
+| Music | [Lama House - Arc of Transcendence](https://www.epidemicsound.com/track/GMAsGEJtK8/) (Royalty free) |
 | Font | [Gentium Plus](https://fonts.google.com/specimen/Gentium+Plus) (Open Font License) |
 
 
@@ -55,4 +52,3 @@ The sounds were created by me using GarageBand.
 - [How Journaling Can Help You in Hard Times](https://greatergood.berkeley.edu/article/item/how_journaling_can_help_you_in_hard_times)
 
 - [Stoicism](https://plato.stanford.edu/entries/stoicism/)
-

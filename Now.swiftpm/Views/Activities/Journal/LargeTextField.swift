@@ -2,8 +2,8 @@ import SwiftUI
 
 struct LargeTextField: View {
     @Binding var text: String
-    var characterLimit = 500
-    @State var characterLeft = 500
+    var characterLimit = 300
+    @State var characterLeft = 300
     var body: some View {
         VStack {
             TextEditor(text: $text)
@@ -32,7 +32,7 @@ struct LargeTextField: View {
     }
 }
 
-struct CustomTextField_previews: PreviewProvider {
+struct LargeTextField_previews: PreviewProvider {
     static var previews: some View {
         TextEditor(text: .constant(""))
     }

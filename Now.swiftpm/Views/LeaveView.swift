@@ -11,8 +11,8 @@ struct LeaveView: View {
     
     @Environment(\.managedObjectContext) private var viewContext
     @EnvironmentObject var userData: UserData
-
-    @Binding var isPresented : Bool
+    @State var showRecap = false
+    @Binding var isPresented: Bool
     
     var body: some View {
         VStack {
@@ -22,22 +22,22 @@ struct LeaveView: View {
             
             Spacer()
             VStack (spacing: 10) {
-                Button {
-                    Persistence.shared.saveUserData(context: viewContext, userData: userData)
-                } label: {
-                    ZStack {
-                        Text("Save today's data")
-                            .font(FontViewModel.shared.fontGentiumPlusTitle4)
-                            .padding(.horizontal, 30)
-                    }
-                }
-                .background(RoundedRectangle(cornerRadius: 15)
-                    .foregroundColor(.secondary.opacity(0.1))
-                )
+//                Button {
+//                    Persistence.shared.saveUserData(context: viewContext, userData: userData)
+//                } label: {
+//                    ZStack {
+//                        Text("Save today's data")
+//                            .font(FontViewModel.shared.fontGentiumPlusTitle4)
+//                            .padding(.horizontal, 30)
+//                    }
+//                }
+//                .background(RoundedRectangle(cornerRadius: 15)
+//                    .foregroundColor(.secondary.opacity(0.1))
+//                )
                 
                 
                 Button {
-                    isPresented = false
+                    showRecap = true
                 } label: {
                     ZStack {
                         Text("Save today's data")
@@ -54,10 +54,14 @@ struct LeaveView: View {
                     .foregroundColor(.red.opacity(0.2))
                 )
                 .padding(.bottom)
-            }
+            } .fullScreenCover(isPresented: $showRecap, content: {
+                RecapView()
+            })
         }
-        
+          
+
     }
+    
 }
 
 struct SwiftUIView_Previews: PreviewProvider {

@@ -119,6 +119,7 @@ struct MenuView: View {
                 musicViewModel.stopBackgroundMusic()
             }
         }
+        .navigationBarBackButtonHidden(true)
         
     }
 }

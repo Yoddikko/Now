@@ -112,9 +112,9 @@ struct HomeView: View {
                     .resizable()
                     .scaledToFit()
                     .frame(width: 200, height: 200)
-            }.position(x: 350, y: 300)
-                .accessibilityLabel("Breathing activity")
-            
+            }
+            .position(x: UIScreen.main.bounds.width - 1000, y: UIScreen.main.bounds.height - 500)
+            .accessibilityLabel("Breathing activity")
             
             //MARK: COLUMN - QUOTES ACTIVITY
             Button {
@@ -124,8 +124,9 @@ struct HomeView: View {
                     .resizable()
                     .scaledToFit()
                     .frame(width: 200, height: 200)
-            }.position(x: 200, y: 600)
-                .accessibilityLabel("Quotes activity")
+            }
+            .position(x: UIScreen.main.bounds.width - 900, y: UIScreen.main.bounds.height - 200)
+            .accessibilityLabel("Quotes activity")
             
             
             
@@ -137,8 +138,10 @@ struct HomeView: View {
                     .resizable()
                     .scaledToFit()
                     .frame(width: 250, height: 250)
-            }.position(x: 800, y: 700)
-                .accessibilityLabel("Journal activity")
+            }
+            .position(x: UIScreen.main.bounds.width - 250, y: UIScreen.main.bounds.height - 200)
+
+            .accessibilityLabel("Journal activity")
 
             //MARK: DOOR - LEAVE
             Button {
@@ -147,20 +150,26 @@ struct HomeView: View {
                 Image("door")
                     .resizable()
                     .scaledToFit()
-                    .frame(width: 400, height: 300)
-            }.position(x: 900, y: 270)
+                    .frame(width: 250, height: 300)
+            }
+            .position(x: UIScreen.main.bounds.width - 390, y: UIScreen.main.bounds.height - 500)
+
                 .accessibilityLabel("Journal activity")
 
 
 
-            
+            //MARK: STAR - GRATITUDE
             Button {
                 gratitudeViewisShowingModal = true
             } label: {
-                Rectangle().frame(width: 50, height: 50)
-                    .foregroundColor(.white)
-            }.position(x: 400, y: 600)
-                .accessibilityLabel("Gratitude activity")
+                Image("star")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 150, height: 150)
+            }
+            .position(x: UIScreen.main.bounds.width - 750, y: UIScreen.main.bounds.height - 400)
+
+            .accessibilityLabel("Gratitude activity")
         }
         
         .sheet(isPresented: $breathingViewisShowingModal, content: {
@@ -198,11 +207,55 @@ struct HomeView: View {
     }
 }
 
-struct HomeView_Preview: PreviewProvider {
+struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeView()
+        Group {
+            HomeView()
+                .previewDevice(PreviewDevice(rawValue: "iPad Pro (9.7-inch)"))
+                .previewDisplayName("iPad Pro (9.7-inch)")
+
+            HomeView()
+                .previewDevice(PreviewDevice(rawValue: "iPad Pro (10.5-inch)"))
+                .previewDisplayName("iPad Pro (10.5-inch)")
+
+            HomeView()
+                .previewDevice(PreviewDevice(rawValue: "iPad Pro (11-inch) (1st generation)"))
+                .previewDisplayName("iPad Pro (11-inch) (1st generation)")
+
+            HomeView()
+                .previewDevice(PreviewDevice(rawValue: "iPad Pro (11-inch) (2nd generation)"))
+                .previewDisplayName("iPad Pro (11-inch) (2nd generation)")
+
+            HomeView()
+                .previewDevice(PreviewDevice(rawValue: "iPad Pro (12.9-inch) (1st generation)"))
+                .previewDisplayName("iPad Pro (12.9-inch) (1st generation)")
+
+            HomeView()
+                .previewDevice(PreviewDevice(rawValue: "iPad Pro (12.9-inch) (2nd generation)"))
+                .previewDisplayName("iPad Pro (12.9-inch) (2nd generation)")
+
+            HomeView()
+                .previewDevice(PreviewDevice(rawValue: "iPad Pro (12.9-inch) (3rd generation)"))
+                .previewDisplayName("iPad Pro (12.9-inch) (3rd generation)")
+
+            HomeView()
+                .previewDevice(PreviewDevice(rawValue: "iPad Pro (12.9-inch) (4th generation)"))
+                .previewDisplayName("iPad Pro (12.9-inch) (4th generation)")
+
+            HomeView()
+                .previewDevice(PreviewDevice(rawValue: "iPad Pro (12.9-inch) (5th generation)"))
+                .previewDisplayName("iPad Pro (12.9-inch) (5th generation)")
+
+            HomeView()
+                .previewDevice(PreviewDevice(rawValue: "iPad (8th generation)"))
+                .previewDisplayName("iPad (8th generation)")
+
+        }
     }
 }
+
+
+
 
 @ViewBuilder
 func createBackgroundWithDesert (isDarkMode: Binding<Bool>) -> some View {

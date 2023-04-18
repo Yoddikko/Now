@@ -48,14 +48,14 @@ struct GratitudeView: View {
             VStack (spacing: 30) {
                 HStack (spacing: 40) {
                     Spacer()
-                    createTextField(text: $text1)
+                    CustomTextField(text: $text1)
                     
-                    createTextField(text: $text2)
+                    CustomTextField(text: $text2)
                     Spacer()
                 }
                 HStack {
                     Spacer()
-                    createTextField(text: $text3)
+                    CustomTextField(text: $text3)
                     Spacer()
                 }
                 
@@ -136,11 +136,13 @@ struct GratitudeView: View {
 }
 
 @ViewBuilder
-func createTextField (text: Binding<String>) -> some View {
+func createTextField (text: Binding<String>, characterLimit: Binding<Int>, characterLeft: Binding<Int>) -> some View {
     TextField("I'm grateful for...", text: text)
+        .font(FontViewModel.shared.fontGentiumPlusBody)
         .padding(10)
+        .border(Color.secondary, width: 1)
+        .cornerRadius(10)
         .frame(maxWidth: 300)
-    
         .background(
             RoundedRectangle(cornerRadius: 8)
             
