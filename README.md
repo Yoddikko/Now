@@ -38,7 +38,7 @@ The sounds were created by me using GarageBand.
 | ------ | ------ |
 | Artworks | Me |
 | Sounds | Me |
-| Music | [Joseph Beg- Let's Be Friends Again](https://www.epidemicsound.com/track/wUAzqQyFpk) (Royalty free) |
+| Music | [Lama House - Arc of Transcendence](https://www.epidemicsound.com/track/GMAsGEJtK8/) (Royalty free) |
 | Font | [Gentium Plus](https://fonts.google.com/specimen/Gentium+Plus) (Open Font License) |
 
 
