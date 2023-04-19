@@ -39,10 +39,9 @@ struct GratitudeView: View {
                 
                 
                 Text("When we take the time to focus on what we have rather than what we lack, we cultivate a sense of abundance and appreciation for the present moment. Gratitude can also help us shift our perspective from one of self-centeredness to one of generosity and compassion, as we become more attuned to the needs and experiences of others")
-                    .padding(.horizontal)
                     .font(FontViewModel.shared.fontGentiumPlusBody)
                     .opacity(textOpacity)
-                
+                    .padding(.horizontal, 45)
                 Divider()
             }
             .background{
@@ -70,6 +69,10 @@ struct GratitudeView: View {
                 
             }
             .padding()
+            .onTapGesture {
+                UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+            }
+
             
             
             Spacer()
@@ -111,6 +114,10 @@ struct GratitudeView: View {
                         }
                     }
                     
+                }
+                .onDisappear {
+                    userData.setGratitudeStrings(strings: [text1, text2, text3])
+
                 }
         }
         .onAppear {

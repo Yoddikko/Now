@@ -9,8 +9,8 @@ import SwiftUI
 
 struct CustomTextField: View {
     @Binding var text: String
-    var characterLimit = 50
-    @State var characterLeft = 50
+    var characterLimit = 25
+    @State var characterLeft = 25
     var body: some View {
         VStack {
             ZStack {

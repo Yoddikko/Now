@@ -28,6 +28,7 @@ class FontViewModel {
         
         let fontURLRegular = Bundle.main.url(forResource: "Gentium Plus", withExtension: "ttf")
         CTFontManagerRegisterFontsForURL(fontURLRegular! as CFURL, CTFontManagerScope.process, nil)
+        
         let fontURLBold = Bundle.main.url(forResource: "Gentium Plus Bold", withExtension: "ttf")
         CTFontManagerRegisterFontsForURL(fontURLBold! as CFURL, CTFontManagerScope.process, nil)
         

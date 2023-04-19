@@ -12,7 +12,8 @@ struct HistoryRecapView: View {
     var userData: UserData
     @Binding var isPresented: Bool
     var body: some View {
-            VStack {
+        NavigationView {
+            ScrollView {
                 Spacer()
                 Text("I am ready for the present, now.")
                     .font(FontViewModel.shared.fontGentiumPlusTitle3).padding()
@@ -28,8 +29,9 @@ struct HistoryRecapView: View {
                         HStack {
                             Spacer()
                             Text(userData.journal)
-                                .multilineTextAlignment(.leading)
+                                .fixedSize(horizontal: false, vertical: true)
                                 .font(FontViewModel.shared.fontGentiumPlusBody)
+                                .lineLimit(10)
                             Spacer()
                         }
                     }.padding()
@@ -102,19 +104,21 @@ struct HistoryRecapView: View {
                         }
                 }
                 Spacer()
+                
+            }.toolbar(content: {
                 Button {
                     isPresented = false
                 } label: {
                     Text("Leave")
-                        .font(FontViewModel.shared.fontGentiumPlusTitle3)
-                        .padding(.horizontal, 30)
                 }
-                .background(RoundedRectangle(cornerRadius: 15)
-                    .foregroundColor(.orange.opacity(0.2))
-                )
-                .padding()
-                
-            }.padding(.horizontal, 50)
+            })
+            
+            
+            .padding(.horizontal, 50)
+        }.navigationBarBackButtonHidden(true)
+            .navigationBarTitleDisplayMode(.inline)
+            .navigationBarHidden(true)
+            .navigationViewStyle(.stack)
     }
 }
 

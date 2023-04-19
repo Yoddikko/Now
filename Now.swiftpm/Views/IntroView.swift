@@ -90,13 +90,16 @@ struct IntroView: View {
                     .padding(.horizontal, 30)
             }.opacity(leaveTextOpacity)
                 .disabled(leaveTextOpacity == 1.0 ? false : true)
+                .padding(.bottom)
+
+            
             .background(RoundedRectangle(cornerRadius: 15)
                 .foregroundColor(.orange.opacity(0.2))
             ).opacity(leaveTextOpacity)
                 .navigationBarBackButtonHidden(true)
 
             
-        }.padding()
+        }.padding(.bottom, 30)
         .edgesIgnoringSafeArea(.all)
     }
 }

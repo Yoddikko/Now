@@ -36,10 +36,9 @@ struct UserDataEntries: View {
                         self.userDataEntity = userData
                         showRecap = true
                     }, label: {
-                        Text(userData.date)
+                        Text(formatDateString(userData.date) ?? userData.date)
                     })
                 }
-                
             }
             .onChange(of: showRecap, perform: { newValue in
                 if newValue {
@@ -49,11 +48,23 @@ struct UserDataEntries: View {
             })
             
             .fullScreenCover(isPresented: $showRecap2, content: {
-                HistoryRecapView(userData: Persistence.shared.getUserData(uuid: userDataEntity!.id)!, isPresented: $showRecap2)
+                HistoryRecapView(userData: Persistence.shared.getUserData(uuid: userDataEntity!.id, context: viewContext)!, isPresented: $showRecap2)
             })
         }
     }
 }
+
+
+func formatDateString(_ dateString: String) -> String? {
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss Z"
+    guard let date = dateFormatter.date(from: dateString) else { return nil }
+    
+    dateFormatter.dateFormat = "d MMMM 'at' HH:mm"
+    dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+    return dateFormatter.string(from: date)
+}
+
 struct UserDataEntries_Previews: PreviewProvider {
     static var previews: some View {
         UserDataEntries(isPresented: .constant(true))

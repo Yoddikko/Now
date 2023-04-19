@@ -5,7 +5,7 @@ struct MyApp: App {
     @StateObject private var persistence = Persistence.shared
     @StateObject private var userData = UserData()
     
-    @AppStorage("isDarkMode") private var isDarkMode = false
+    @AppStorage("isDarkMode") private var isDarkMode = true
     var body: some Scene {
         WindowGroup {
         MenuView()

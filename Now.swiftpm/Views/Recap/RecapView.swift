@@ -13,7 +13,7 @@ struct RecapView: View {
     
     var body: some View {
         NavigationView {
-            VStack {
+            ScrollView {
                 Spacer()
                 Text("I am ready for the present, now.")
                     .font(FontViewModel.shared.fontGentiumPlusTitle3).padding()
@@ -22,10 +22,10 @@ struct RecapView: View {
                     }
                 if userData.getJournalText() != "" {
                     VStack {
-                        
-                        Text(getFormattedDate())
-                            .font(FontViewModel.shared.fontGentiumPlusTitle4)
-                        
+                        HStack {
+                            Text(getFormattedDate())
+                                .font(FontViewModel.shared.fontGentiumPlusTitle4)
+                        }
                         HStack {
                             Spacer()
                             Text(userData.journal)
@@ -39,7 +39,7 @@ struct RecapView: View {
                                 .foregroundColor(.secondary.opacity(0.2))
                         }
                 }
-                
+
                 if userData.gratitude?.count ?? 0 > 0 {
                     VStack {
                         Text("Today I was grateful for...")
@@ -103,21 +103,19 @@ struct RecapView: View {
                         }
                 }
                 Spacer()
-                NavigationLink {
-                    MenuView()
-                } label: {
-                    Text("Leave")
-                        .font(FontViewModel.shared.fontGentiumPlusTitle3)
-                        .padding(.horizontal, 30)
-                }
-                .background(RoundedRectangle(cornerRadius: 15)
-                    .foregroundColor(.orange.opacity(0.2))
-                )
-                .padding()
                 
             }.padding(.horizontal, 50)
+                .toolbar(content: {
+                    NavigationLink {
+                        MenuView()
+                    } label: {
+                        Text("Leave")
+                    }
+                })
         }.navigationBarBackButtonHidden(true)
+            .navigationViewStyle(.stack)
     }
+    
 }
 
 func timeString(fromSeconds seconds: Int) -> String {

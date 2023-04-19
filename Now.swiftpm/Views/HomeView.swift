@@ -11,7 +11,10 @@ struct HomeView: View {
     
     @ObservedObject var musicViewModel = SoundViewModel.shared
     
-    @AppStorage("isDarkMode") private var isDarkMode = false
+    @AppStorage("isDarkMode") private var isDarkMode = true
+    
+//    @EnvironmentObject var isDarkMode: Bool
+
     
     @EnvironmentObject var userData: UserData
 
@@ -114,7 +117,8 @@ struct HomeView: View {
                     .scaledToFit()
                     .frame(width: 200, height: 200)
             }
-            .position(x: UIScreen.main.bounds.width - 800, y: UIScreen.main.bounds.height - 450)
+//            .position(x: UIScreen.main.bounds.width - 1000, y: UIScreen.main.bounds.height - 500)
+            .position(getPosition(percentX: 25, percentY: 48))
             .accessibilityLabel("Breathing activity")
             
             //MARK: COLUMN - QUOTES ACTIVITY
@@ -126,7 +130,7 @@ struct HomeView: View {
                     .scaledToFit()
                     .frame(width: 200, height: 200)
             }
-            .position(x: UIScreen.main.bounds.width - 900, y: UIScreen.main.bounds.height - 200)
+            .position(getPosition(percentX: 18, percentY: 80))
             .accessibilityLabel("Quotes activity")
             
             
@@ -140,7 +144,7 @@ struct HomeView: View {
                     .scaledToFit()
                     .frame(width: 250, height: 250)
             }
-            .position(x: UIScreen.main.bounds.width - 170, y: UIScreen.main.bounds.height - 150)
+            .position(getPosition(percentX: 85, percentY: 80))
 
             .accessibilityLabel("Journal activity")
 
@@ -153,7 +157,7 @@ struct HomeView: View {
                     .scaledToFit()
                     .frame(width: 250, height: 300)
             }
-            .position(x: UIScreen.main.bounds.width - 300, y: UIScreen.main.bounds.height - 500)
+            .position(getPosition(percentX: 85, percentY: 35))
 
                 .accessibilityLabel("Journal activity")
 
@@ -168,7 +172,7 @@ struct HomeView: View {
                     .scaledToFit()
                     .frame(width: 150, height: 150)
             }
-            .position(x: UIScreen.main.bounds.width - 500, y: UIScreen.main.bounds.height - 300)
+            .position(getPosition(percentX: 50, percentY: 65))
 
             .accessibilityLabel("Gratitude activity")
         }
@@ -280,3 +284,12 @@ func createBackgroundWithDesert (isDarkMode: Binding<Bool>) -> some View {
     }
 }
 
+func getPosition(percentX: CGFloat, percentY: CGFloat) -> CGPoint {
+    let screenWidth = UIScreen.main.bounds.width
+    let screenHeight = UIScreen.main.bounds.height
+    
+    let posX = (screenWidth * percentX) / 100
+    let posY = (screenHeight * percentY) / 100
+    
+    return CGPoint(x: posX, y: posY)
+}

@@ -180,8 +180,6 @@ class Persistence: ObservableObject {
     }
         return []
 }
-
-
     
     func saveQuotesFromJSON(context: NSManagedObjectContext) {
         if isFirstTime {
@@ -214,7 +212,7 @@ class Persistence: ObservableObject {
         }
     }
     
-    func castUserData(userDataEntity: UserDataEntity) -> UserData {
+    func castUserData(userDataEntity: UserDataEntity, context: NSManagedObjectContext) -> UserData {
         var gratitude : [String] = []
         if userDataEntity.gratitude1 != "" {
             gratitude.append(userDataEntity.gratitude1)
@@ -226,16 +224,31 @@ class Persistence: ObservableObject {
             gratitude.append(userDataEntity.gratitude3)
         }
         
-        let userData = UserData(breathing: userDataEntity.breathing, journal: userDataEntity.journal, gratitude: gratitude)
+        
+        let quote = getQuoteFromIndex(index: userDataEntity.quoteIndex, context: context)
+        
+        let userData = UserData(breathing: userDataEntity.breathing, journal: userDataEntity.journal, quote: quote, gratitude: gratitude)
         return userData
     }
     
-    func getUserData (uuid: UUID) -> UserData? {
+    func fetchQuotes(context: NSManagedObjectContext) -> [Quote]? {
+        let fetchRequest: NSFetchRequest<Quote> = NSFetchRequest<Quote>(entityName: "Quote")
+        var quotes = [Quote]()
+        do {
+            let results = try container.viewContext.fetch(fetchRequest)
+            quotes.append(contentsOf: results)
+        } catch {
+            debugPrint(error)
+        }
+        return quotes
+    }
+    
+    func getUserData (uuid: UUID, context: NSManagedObjectContext) -> UserData? {
         var castedUserData = UserData()
-        var userDataEntity = userDataEntries.first(where: {
+        let userDataEntity = userDataEntries.first(where: {
             $0.id == uuid
         })
-        castedUserData = castUserData(userDataEntity: userDataEntity!)
+        castedUserData = castUserData(userDataEntity: userDataEntity!, context: context)
 
         return castedUserData
         
@@ -265,6 +278,14 @@ class Persistence: ObservableObject {
         } catch {
             debugPrint(error.localizedDescription)
         }
+    }
+    
+    func getQuoteFromIndex(index: Int, context: NSManagedObjectContext) -> Quote? {
+        let quotes = fetchQuotes(context: context)
+        let quote = quotes?.first(where: { quote in
+            quote.index == index
+        })
+        return quote
     }
 }
 

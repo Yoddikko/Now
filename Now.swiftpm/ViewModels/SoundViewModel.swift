@@ -24,7 +24,7 @@ class SoundViewModel : ObservableObject {
                 guard let musicPlayer = musicPlayer else { return }
                 musicPlayer.numberOfLoops = -1
                 musicPlayer.prepareToPlay()
-//                musicPlayer.play()
+                musicPlayer.play()
             } catch {
                 print(error)
             }
