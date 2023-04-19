@@ -11,6 +11,10 @@ Even in the middle of the chaos of daily life, it offers a secure space to conte
 >“ One of the best pieces of advice I ever got was from a horse master. He told me to go slow to go fast. I think that applies to everything in life. We live as though there aren't enough hours in the day but if we do each thing calmly and carefully we will get it done quicker and with much less stress.. ” 
 > Viggo Mortensen
 
+## Video
+
+https://www.youtube.com/watch?v=p4cmUtHqRlM&ab_channel=Alessi
+
 ## Features
 
 - Many activities to relax and unwind 🍃
