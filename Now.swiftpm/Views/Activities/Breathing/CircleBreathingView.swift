@@ -13,7 +13,7 @@ struct CircleBreathingView: View {
     @State private var started = false
     @Binding var timer : Timer?
     @Binding var elapsedSeconds : Int
-    @AppStorage("isDarkMode") private var isDarkMode = false
+    @AppStorage("isDarkMode") private var isDarkMode = true
     
     var body: some View {
         if started {
@@ -62,6 +62,7 @@ struct CircleBreathingView: View {
                 Text("Tap to start")
                     .foregroundColor(isDarkMode ? .black : .white)
                     .font(FontViewModel.shared.fontGentiumPlusTitle5)
+                
             }.onTapGesture {
                 started = true
                 startTimer()
