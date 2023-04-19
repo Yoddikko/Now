@@ -260,12 +260,14 @@ class Persistence: ObservableObject {
         if userData.gratitude?.count == 1 {
             userDataEntity.gratitude1 = userData.gratitude?[0] ?? ""
         }
-        if userData.gratitude?.count == 2 {
-            userDataEntity.gratitude1 = userData.gratitude?[1] ?? ""
+        if  userData.gratitude?.count == 2 {
+            userDataEntity.gratitude1 = userData.gratitude?[0] ?? ""
+            userDataEntity.gratitude2 = userData.gratitude?[1] ?? ""
         }
-        
         if userData.gratitude?.count == 3 {
-            userDataEntity.gratitude1 = userData.gratitude?[2] ?? ""
+            userDataEntity.gratitude1 = userData.gratitude?[0] ?? ""
+            userDataEntity.gratitude2 = userData.gratitude?[1] ?? ""
+            userDataEntity.gratitude3 = userData.gratitude?[2] ?? ""
         }
 
         
