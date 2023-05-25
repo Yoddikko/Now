@@ -1,6 +1,8 @@
 # Now. (WWDC2023)
 ## _Your safe space_
 
+WWDC 2023 WINNER  - This is a short experience made for the WWDC 2023 Swift challenge made in less than a week. The experience has to be max 3 minutes.
+
 Even in the midst of chaos, we can maintain our mental and emotional health by practicing inner serenity and tranquility. Take a deep breath, find a quiet location, and keep in mind that you have the capacity to choose how you respond to the world around you if you're feeling overburdened by the busyness of modern life.
 
 **Now.** is a safe space where you may pause, unwind, and contemplate about the *present*. It sticks to the principles of *Stoic* philosophy. 
